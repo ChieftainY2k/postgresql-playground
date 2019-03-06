@@ -4,6 +4,7 @@
 
 ````
 echo "127.0.0.1 pgadmin.postgres.local" >> /etc/hosts
+echo "127.0.0.1 phpapp.postgres.local" >> /etc/hosts
 ````
 
 **Set-up docker application environment**

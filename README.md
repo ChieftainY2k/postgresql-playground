@@ -44,40 +44,39 @@ Step 4: Launch Vagrant Box
 
 `````
 cd vagrant
-vagrant box update
 vagrant up 
 vagrant ssh
 `````
 
-**PgAdmin web interface access**
+**PgAdmin web interface**
 
 * Access http://pgadmin.postgres.local
 
-** Login: root@localhost
-** Password: root
+* Login: root@localhost
+* Password: root
 
 **PostgreSQL access (from PgAdmin interface)**
 
-** Server: postgres
-** Port: see POSTGRES_PORT_TO_EXPOSE in the .env file
-** User: web 
-** Password: web 
-** Database: web
+* Server: postgres
+* Port: see POSTGRES_PORT_TO_EXPOSE in the .env file
+* User: web 
+* Password: web 
+* Database: web
 
 **PostgreSQL access (from outside of docker/vagrant)**
 
-** Server: localhost
-** Docker Port: see POSTGRES_PORT_TO_EXPOSE in the .env file
-** Vagrant Port: 5432
-** User: web 
-** Password: web 
-** Database: web
+* Server: localhost
+* Docker Port: see POSTGRES_PORT_TO_EXPOSE in the .env file
+* Vagrant Port: 5432
+* User: web 
+* Password: web 
+* Database: web
 
-**Accessing PHP Applicatioin web interface**
+**PHP Applicatioin web interface**
 
 * Url: http://phpapp.postgres.local
 
-**Accessing PHP Allication CLI shell**
+**PHP Allication CLI shell**
 `````
 cd /YOUR_PROJECT_DIRECTORY/docker
 docker-compose exec phpapp bash

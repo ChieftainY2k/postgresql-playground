@@ -16,6 +16,16 @@ services:
     volumes:
       - postgresql_volume:/var/lib/postgresql/data
 
+  # NGINX proxy for virtual hosts inside docker
+  nginx:
+    build:
+      context: services/nginx
+      dockerfile: Dockerfile.nginx
+    ports:
+      - ${NGINX_PORT_TO_EXPOSE}:80
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+
   # PgAdmin
   pgadmin:
     build:
@@ -26,8 +36,6 @@ services:
       - PGADMIN_LISTEN_PORT=80
       - PGADMIN_DEFAULT_EMAIL=root@localhost
       - PGADMIN_DEFAULT_PASSWORD=root
-    ports:
-      - 80:80
     volumes:
       - pgadmin_volume:/var/lib/pgadmin
       - pgadmin_volume:/servers.json

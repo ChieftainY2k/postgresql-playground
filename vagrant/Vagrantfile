@@ -1,0 +1,45 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+    config.hostmanager.enabled = true
+    config.hostmanager.manage_host = true
+    config.hostmanager.ignore_private_ip = false
+    config.hostmanager.include_offline = true
+
+    config.vm.provider "virtualbox" do |v|
+      v.memory = 2500
+      v.cpus = 4
+      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+    end
+
+    config.winrm.timeout = 1800
+
+    config.vm.define "postgres" do |node|
+
+        node.vm.box = "ubuntu/bionic64"
+        node.vm.boot_timeout = 1800
+
+        node.vm.network "forwarded_port", guest: 80, host: 80 #web
+        node.vm.network "forwarded_port", guest: 5432, host: 5432 #postgres
+
+        node.vm.hostname = "pgadmin.postgres.local"
+
+        node.vm.synced_folder "../", "/playground/"
+
+        node.vm.provision :shell, path: "provision.sh"
+        node.vm.provision :shell, path: "up.sh", run: "always"
+
+        node.hostmanager.aliases = [
+            "pgadmin.postgres.local"
+        ]
+
+
+    end
+
+
+
+end

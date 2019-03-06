@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+
+  # Postgres
+  postgres:
+    build:
+      context: services/postgres
+      dockerfile: Dockerfile.postgres
+    environment:
+      - POSTGRES_USER=web
+      - POSTGRES_PASSWORD=web
+      - POSTGRES_DB=web
+    ports:
+      - ${POSTGRES_PORT_TO_EXPOSE}:5432
+    volumes:
+      - ./data/postgres/data:/var/lib/postgresql/data
+
+  # PgAdmin
+  pgadmin:
+    build:
+      context: services/pgadmin
+      dockerfile: Dockerfile.pgadmin
+    environment:
+      - VIRTUAL_HOST=varlib.postgres.local
+      - PGADMIN_LISTEN_PORT=80
+      - PGADMIN_DEFAULT_EMAIL=root@localhost
+      - PGADMIN_DEFAULT_PASSWORD=root
+    ports:
+      - 80:80
+#    volumes:
+#      - data/pgadmin/varlib/:/var/lib/pgadmin
+#      - data/pgadmin/pgadmin4/servers.json:/servers.json
+
+#volumes:
+#  postgres_volume:
+#  pgadmin_volume:

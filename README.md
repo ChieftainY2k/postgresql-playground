@@ -18,7 +18,10 @@ cp .env.dist .env
 Edit docker/.env and replace: 
 
     NGINX_PORT_TO_EXPOSE with the port you want to expose
-    POSTGRES_PORT_TO_EXPOSE with the port you want to expose 
+    POSTGRES_PORT_TO_EXPOSE with the port you want to expose
+    SYMFONY_APP_PATH with the root location of your symfony application
+    SYMFONY_CACHE_DIR with the root dor for symfony cache (change this to "/tmp" when using VM for performance reasons)
+ 
     
 In case of conflicts with the local environment it is suggested to change port mapping of nginx and postgresql to different 
 than default.    
@@ -68,6 +71,16 @@ vagrant ssh
 ** User: web 
 ** Password: web 
 ** Database: web
+
+**Accessing PHP Applicatioin web interface**
+
+* Url: http://phpapp.postgres.local
+
+**Accessing PHP Allication CLI shell**
+`````
+cd /YOUR_PROJECT_DIRECTORY/docker
+docker-compose exec phpapp bash
+`````
 
 
 **Starting docker application**

@@ -22,7 +22,7 @@ services:
       context: services/pgadmin
       dockerfile: Dockerfile.pgadmin
     environment:
-      - VIRTUAL_HOST=varlib.postgres.local
+      - VIRTUAL_HOST=pgadmin.postgres.local
       - PGADMIN_LISTEN_PORT=80
       - PGADMIN_DEFAULT_EMAIL=root@localhost
       - PGADMIN_DEFAULT_PASSWORD=root
@@ -33,6 +33,20 @@ services:
       - pgadmin_volume:/servers.json
       - pgadmin_volume:/pgadmin4/config_local.py
       - pgadmin_volume:/pgadmin4/servers.json
+
+  # PHP
+  phpapp:
+    build:
+      context: services/phpapp
+      dockerfile: Dockerfile.phpapp
+    volumes:
+      -  ${SYMFONY_APP_PATH}:/code/
+    environment:
+      - VIRTUAL_HOST=phpapp.postgres.local
+      - APP_ENV=dev
+      - COMPOSER_CACHE_DIR=/tmp
+      - COMPOSER_ALLOW_SUPERUSER=1
+      - SYMFONY_CACHE_DIR=${SYMFONY_CACHE_DIR}
 
 volumes:
   postgresql_volume:

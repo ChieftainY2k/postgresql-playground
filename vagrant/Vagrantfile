@@ -34,7 +34,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         node.vm.provision :shell, path: "up.sh", run: "always"
 
         node.hostmanager.aliases = [
-            "pgadmin.postgres.local"
+            "pgadmin.postgres.local",
+            "phpapp.postgres.local"
         ]
 
 

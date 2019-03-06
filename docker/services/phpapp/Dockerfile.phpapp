@@ -1,0 +1,28 @@
+FROM php:7.3.1-apache-stretch
+
+# Configure document root
+ENV APACHE_DOCUMENT_ROOT /code/public
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+ADD ./docker-php.conf /etc/apache2/conf-available/docker-php.conf
+
+RUN apt-get -y update
+RUN apt-get -y upgrade
+RUN apt-get -y install mc joe multitail screen less
+
+# Install MySQL PDO
+RUN docker-php-ext-install pdo_mysql
+
+# Install xDebug
+RUN pecl install xdebug-beta
+ADD ./xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
+
+# Install composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+WORKDIR /code
+
+# Container main process
+ADD ./runner.sh /runner.sh
+RUN chmod a+x /runner.sh
+CMD /runner.sh

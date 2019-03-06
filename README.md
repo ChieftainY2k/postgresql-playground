@@ -45,19 +45,29 @@ vagrant up
 vagrant ssh
 `````
 
-**Accessing database with the dockerized PgAdmin**
+**PgAdmin web interface access**
 
 * Access http://pgadmin.postgres.local
 
-  Server: postgres
-  
-  Port: see POSTGRES_PORT_TO_EXPOSE in the .env file
+** Login: root@localhost
+** Password: root
 
-  User: web 
-  
-  Password: web 
+**PostgreSQL access (from PgAdmin interface)**
 
-  Database: web
+** Server: postgres
+** Port: see POSTGRES_PORT_TO_EXPOSE in the .env file
+** User: web 
+** Password: web 
+** Database: web
+
+**PostgreSQL access (from outside of docker/vagrant)**
+
+** Server: localhost
+** Docker Port: see POSTGRES_PORT_TO_EXPOSE in the .env file
+** Vagrant Port: 5432
+** User: web 
+** Password: web 
+** Database: web
 
 
 **Starting docker application**

@@ -14,7 +14,7 @@ services:
     ports:
       - ${POSTGRES_PORT_TO_EXPOSE}:5432
     volumes:
-      - ./data/postgres/data:/var/lib/postgresql/data
+      - postgresql_volume:/var/lib/postgresql/data
 
   # PgAdmin
   pgadmin:
@@ -28,7 +28,12 @@ services:
       - PGADMIN_DEFAULT_PASSWORD=root
     ports:
       - 80:80
-#    volumes:
-#      - ./data/pgadmin/varlib/:/var/lib/pgadmin
-#      - ./data/pgadmin/pgadmin4/servers.json:/servers.json
+    volumes:
+      - pgadmin_volume:/var/lib/pgadmin
+      - pgadmin_volume:/servers.json
+      - pgadmin_volume:/pgadmin4/config_local.py
+      - pgadmin_volume:/pgadmin4/servers.json
 
+volumes:
+  postgresql_volume:
+  pgadmin_volume:

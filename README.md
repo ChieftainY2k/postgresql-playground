@@ -50,6 +50,8 @@ vagrant ssh
 * Access http://pgadmin.postgres.local
 
   Server: postgres
+  
+  Port: see POSTGRES_PORT_TO_EXPOSE in the .env file
 
   User: web 
   

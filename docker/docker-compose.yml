@@ -29,9 +29,6 @@ services:
     ports:
       - 80:80
 #    volumes:
-#      - data/pgadmin/varlib/:/var/lib/pgadmin
-#      - data/pgadmin/pgadmin4/servers.json:/servers.json
+#      - ./data/pgadmin/varlib/:/var/lib/pgadmin
+#      - ./data/pgadmin/pgadmin4/servers.json:/servers.json
 
-#volumes:
-#  postgres_volume:
-#  pgadmin_volume:

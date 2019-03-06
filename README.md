@@ -76,7 +76,7 @@ vagrant ssh
 
 * Url: http://phpapp.postgres.local
 
-**PHP Allication CLI shell**
+**PHP Applicatioin CLI shell**
 `````
 cd /YOUR_PROJECT_DIRECTORY/docker
 docker-compose exec phpapp bash
